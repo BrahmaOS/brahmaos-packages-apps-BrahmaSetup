@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/space_normal"
+        android:layout_marginStart="@dimen/space_normal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginTop="@dimen/space_larger"
+            android:scaleType="fitCenter"
+            android:src="@drawable/backup" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_large"
+            android:text="@string/backup_mnemonic"
+            android:textColor="#FF000000"
+            android:textSize="@dimen/font_size_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_normal"
+            android:text="@string/mnemonic_prof"
+            android:textColor="@color/color_hint_text"
+            android:textSize="@dimen/font_size_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_normal"
+            android:text="@string/write_down_mnemonic"
+            android:textColor="#FF000000"
+            android:textSize="@dimen/font_size_normal" />
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/mnemonic_str"
+            android:layout_below="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_normal"
+            android:layout_marginTop="@dimen/space_large"
+            android:background="@color/background"
+            android:textColor="#FF000000"
+            android:textSize="@dimen/font_size_normal"
+            android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginRight="@dimen/space_normal"
+        android:layout_marginStart="@dimen/space_normal"
+        android:layout_below="@+id/mnemonic_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/space_large"
+        android:text="@string/mnemonic_backup_tip"
+        android:textSize="@dimen/font_size_note_content" />
+
+    <RelativeLayout
+        android:layout_marginRight="@dimen/space_normal"
+        android:layout_marginStart="@dimen/space_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/space_normal">
+
+        <Button
+            android:id="@+id/btn_next"
+            style="@style/ButtonNext"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/action_next" />
+    </RelativeLayout>
+</RelativeLayout>
+

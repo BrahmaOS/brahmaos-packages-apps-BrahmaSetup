@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/master</color>
+    <color name="master">#3C78C2</color>
+    <color name="divider">#18000000</color>
+    <color name="color_hint_text">#64000000</color>
+    <color name="color_divider">#1c000000</color>
+
+    <color name="main_btn_bg">@color/master</color>
+    <color name="main_btn_selected_bg">@color/master</color>
+    <color name="main_btn_disabled_bg">#ffcccccc</color>
+    <color name="main_btn_text">#FFFFFFFF</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+
+    <color name="background">#FFF0F0F0</color>
+</resources>

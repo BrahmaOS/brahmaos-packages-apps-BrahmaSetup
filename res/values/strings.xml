@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">BrahmaOSSetupWizard</string>
+    <string name="create_account">Create Account</string>
+    <string name="account_prof">The Brahma account is a locally generated decentralized account, which is your unique identity on Brahma OS and the primary account of your Brahma Wallet.</string>
+    <string name="action_next">Next</string>
+    <string name="action_previous">Back</string>
+    <string name="action_finish">Finish</string>
+    <string name="prompt_account_name">Name</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_repeat_password">Repeat password</string>
+    <string name="action_agree">Agree on</string>
+    <string name="service_agreement">&#160;Service Agreement&#160;</string>
+    <string name="protocol_and">and</string>
+    <string name="privacy_policy">&#160;Privacy Policy</string>
+    <string name="tip_create_account_one">&#8226;&#160;&#160;Password strength is critical to guard your account</string>
+    <string name="tip_create_account_two">&#8226;&#160;&#160;BrahmaWallet can\'t recover the password, please backup cautiously</string>
+    <string name="error_incorrect_name">The name is taken</string>
+    <string name="error_invalid_password">This password is too simple!</string>
+    <string name="error_incorrect_password">Password is not match</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="progress_create_account">create…</string>
+    <string name="success_create_account">Create account success!</string>
+    <string name="error_create_account">Create account error! please try again!</string>
+    <string name="error_account_address">Error account address!</string>
+    <string name="error_import_account">Import account error! please try again!</string>
+    <string name="success_import_account">Import account success!</string>
+    <string name="error_mnemonics">Error mnemonics!</string>
+
+    <string name="action_import_account">Import Account</string>
+    <string name="import_mnemonics_hint">Enter mnemonics, separated by spaces.</string>
+    <string name="progress_import_account">import…</string>
+
+    <string name="backup_mnemonic">Backup Mnemonic</string>
+    <string name="mnemonic_prof">Asset security cannot be guaranteed without proper backup. When the application or the wallet is deleted from your device, you need the backup file to restore the wallet.</string>
+    <string name="write_down_mnemonic">Please carefully copy the mnemonic below. We will verify it in the next step.</string>
+    <string name="mnemonic_backup_tip">&#8226;&#160;&#160;Please make a backup in a safe environment with no camera around.</string>
+
+    <string name="confirm_mnemonic">Confirm Mnemonic</string>
+    <string name="confirm_prof">Please click on the mnemonic in order to confirm that you have backed up correctly.</string>
+
+    <string name="title_service_terms">Brahma Wallet Service Agreement</string>
+
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <dimen name="font_size_title">30sp</dimen>
+    <dimen name="font_size_normal">18sp</dimen>
+    <dimen name="font_size_caption">16sp</dimen>
+    <dimen name="font_size_note_title">16sp</dimen>
+    <dimen name="font_size_note_content">14sp</dimen>
+
+    <dimen name="space_smaller">8dp</dimen>
+    <dimen name="space_small">10dp</dimen>
+    <dimen name="space_normal">20dp</dimen>
+    <dimen name="space_large">25dp</dimen>
+    <dimen name="space_larger">35dp</dimen>
+
+    <dimen name="icon_size">45dp</dimen>
+
+    <dimen name="block_corner">4dp</dimen>
+    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="dialog_height">550dp</dimen>
+</resources>

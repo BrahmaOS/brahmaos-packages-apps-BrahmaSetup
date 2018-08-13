@@ -1,0 +1,41 @@
+<resources>
+    <string name="create_account">创建账号</string>
+    <string name="account_prof">Brahma 账号为本地生成的去中心化账号，既作为您在 Brahma OS 上的唯一身份标识，也是您在 Brahma 钱包的主账号身份。</string>
+    <string name="action_next">下一步</string>
+    <string name="action_previous">返回</string>
+    <string name="action_finish">完成</string>
+    <string name="prompt_account_name">账号名</string>
+    <string name="prompt_password">密码</string>
+    <string name="prompt_repeat_password">重复密码</string>
+    <string name="action_agree">同意</string>
+    <string name="service_agreement">&#160;服务协议&#160;</string>
+    <string name="protocol_and">及</string>
+    <string name="privacy_policy">&#160;隐私条款</string>
+    <string name="tip_create_account_one">&#8226;&#160;&#160;密码用于保护私钥和交易授权，强度非常重要。</string>
+    <string name="tip_create_account_two">&#8226;&#160;&#160;钱包不存储密码，也无法帮您找回，请务必牢记！</string>
+    <string name="error_incorrect_name">账号名已占用</string>
+    <string name="error_invalid_password">密码太简单!</string>
+    <string name="error_incorrect_password">两次输入的密码不匹配</string>
+    <string name="error_field_required">必填字段</string>
+    <string name="progress_create_account">创建中…</string>
+    <string name="success_create_account">创建账号成功!</string>
+    <string name="error_create_account">创建账号失败!</string>
+    <string name="error_account_address">错误的账号地址!</string>
+    <string name="error_import_account">导入账号失败!</string>
+    <string name="success_import_account">导入账号成功!</string>
+    <string name="error_mnemonics">错误的助记词!</string>
+
+    <string name="action_import_account">导入账号</string>
+    <string name="import_mnemonics_hint">助记词，以空格隔开。</string>
+    <string name="progress_import_account">导入中…</string>
+
+    <string name="backup_mnemonic">备份账号</string>
+    <string name="mnemonic_prof">没有妥善备份就无法保障资产安全。删除程序或钱包后，你需要备份文件来恢复钱包。</string>
+    <string name="write_down_mnemonic">请仔细抄写下方助记词，我们将在下一步验证。</string>
+    <string name="mnemonic_backup_tip">&#8226;&#160;&#160;请在四周无人、确保没有摄像头的安全环境进行备份。</string>
+
+    <string name="confirm_mnemonic">确认助记词</string>
+    <string name="confirm_prof">请按顺序点击助记词，以确认您正确备份。</string>
+
+    <string name="title_service_terms">梵钱包服务协议</string>
+</resources>
