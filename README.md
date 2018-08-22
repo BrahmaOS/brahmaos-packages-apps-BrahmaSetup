@@ -34,5 +34,5 @@ We save **public key** and **encrypted private key** to local and support interf
 
 Building
 ------
-This app's codes used the self-defined interfaces added in the Brahma OS framework. Before building this app, you need to pull and apply the framework PATCH under BrahmaOS/brahmaos-patches <https://github.com/BrahmaOS/brahmaos-patches/commit/b07db7d1516818ecc7c78b3e74094bf12340bfe5>.
+This app's codes used the self-defined interfaces added in the Brahma OS framework. Before building this app, you need to pull and apply the Setup Wizard related framework PATCH under [BrahmaOS/brahmaos-patches](https://github.com/BrahmaOS/brahmaos-patches)
 
