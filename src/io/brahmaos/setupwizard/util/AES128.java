@@ -1,13 +1,19 @@
 package io.brahmaos.setupwizard.util;
 
 import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class AES128 {
+    private static byte[] salt = new String("12345678").getBytes();
+    private static int iterationCount = 1024;
+    private static int keyStrength = 128;
     /**
      * Encrypt
      *
@@ -20,9 +26,8 @@ public class AES128 {
 
         try {
             Cipher cipher = Cipher.getInstance("AES");
-            byte[] byteContent = content.getBytes("utf-8");
             cipher.init(Cipher.ENCRYPT_MODE, genKey(password));
-            byte[] result = cipher.doFinal(byteContent);
+            byte[] result = cipher.doFinal(content.getBytes());
             return parseByte2HexStr(result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,18 +61,16 @@ public class AES128 {
      * @return
      */
     private  static SecretKeySpec genKey(String password){
-        byte[] enCodeFormat = {0};
         try {
-            KeyGenerator kgen = KeyGenerator.getInstance("AES");
-            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-            secureRandom.setSeed(password.getBytes());
-            kgen.init(128, secureRandom);
-            SecretKey secretKey = kgen.generateKey();
-            enCodeFormat = secretKey.getEncoded();
+            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterationCount, keyStrength);
+            SecretKey tmp = factory.generateSecret(spec);
+            SecretKeySpec key = new SecretKeySpec(tmp.getEncoded(), "AES");
+            return key;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new SecretKeySpec(enCodeFormat, "AES");
+        return null;
     }
 
 

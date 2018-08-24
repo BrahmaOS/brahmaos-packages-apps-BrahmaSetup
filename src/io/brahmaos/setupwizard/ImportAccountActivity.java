@@ -137,7 +137,7 @@ public class ImportAccountActivity  extends BaseActivity {
         customProgressDialog.show();
 
         // check the private key valid
-        boolean result = ((WizardApplication) getApplication()).importAccountWithMnemonics(mnemonics, password, name);
+        boolean result = ((WizardApplication) getApplication()).createBrahmaAccountByMnemonics(mnemonics, password, name);
         customProgressDialog.show();
         if (result) {
             showLongToast(R.string.success_import_account);

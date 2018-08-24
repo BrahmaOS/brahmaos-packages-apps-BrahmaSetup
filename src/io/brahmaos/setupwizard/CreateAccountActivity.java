@@ -116,7 +116,7 @@ public class CreateAccountActivity extends BaseActivity {
         customProgressDialog.setCancelable(false);
         customProgressDialog.show();
 
-        boolean result = ((WizardApplication)getApplication()).createEthereumAccWithMnemonic(name, password);
+        boolean result = ((WizardApplication)getApplication()).createMnemonicsAndBrahmaAccount(name, password);
         customProgressDialog.cancel();
         if (result) {
             showLongToast(R.string.success_create_account);
