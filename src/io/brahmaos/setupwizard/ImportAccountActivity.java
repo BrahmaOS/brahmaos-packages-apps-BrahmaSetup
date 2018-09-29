@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.setupwizardlib.GlifLayout;
+
 public class ImportAccountActivity  extends BaseActivity {
     @Override
     protected String tag() {
@@ -27,7 +29,7 @@ public class ImportAccountActivity  extends BaseActivity {
     private TextView tvService;
     private TextView tvPrivacyPolicy;
     private Button btnNext;
-    private TextView tvPrevious;
+//    private TextView tvPrevious;
     private CustomProgressDialog customProgressDialog;
     private EditText etMnemonic;
     private EditText etAccountName;
@@ -38,6 +40,11 @@ public class ImportAccountActivity  extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_account);
+
+        GlifLayout gl = (GlifLayout) findViewById(R.id.setup_wizard_layout);
+        gl.setHeaderText(R.string.action_import_account);
+        gl.setIcon(getDrawable(R.drawable.account));
+
         spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.mnemonic_path, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -59,10 +66,12 @@ public class ImportAccountActivity  extends BaseActivity {
         });
 
         btnNext = (Button) findViewById(R.id.btn_next);
+        btnNext.setEnabled(false);
         btnNext.setOnClickListener(view->importMnemonicAccount());
 
-        tvPrevious = (TextView) findViewById(R.id.btn_previous);
-        tvPrevious.setOnClickListener(view->startCreateAccountActivity());
+//        tvPrevious = (TextView) findViewById(R.id.btn_skip);
+//        tvPrevious.setText(R.string.action_previous);
+//        tvPrevious.setOnClickListener(view->startCreateAccountActivity());
 
         etMnemonic = (EditText) findViewById(R.id.et_mnemonic);
         etAccountName = (EditText) findViewById(R.id.et_account_name);
@@ -138,10 +147,10 @@ public class ImportAccountActivity  extends BaseActivity {
 
         // check the private key valid
         boolean result = ((WizardApplication) getApplication()).createBrahmaAccountByMnemonics(mnemonics, password, name);
-        customProgressDialog.show();
+        customProgressDialog.cancel();
         if (result) {
             showLongToast(R.string.success_import_account);
-            setupWizardComplete();
+            startFingerprintActivity();
         } else {
             showLongToast(R.string.error_import_account);
         }

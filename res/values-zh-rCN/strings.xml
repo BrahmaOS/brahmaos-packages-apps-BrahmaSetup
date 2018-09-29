@@ -4,6 +4,7 @@
     <string name="action_next">下一步</string>
     <string name="action_previous">返回</string>
     <string name="action_finish">完成</string>
+    <string name="action_skip">跳过</string>
     <string name="prompt_account_name">账号名</string>
     <string name="prompt_password">密码</string>
     <string name="prompt_repeat_password">重复密码</string>
@@ -38,4 +39,18 @@
     <string name="confirm_prof">请按顺序点击助记词，以确认您正确备份。</string>
 
     <string name="title_service_terms">梵钱包服务协议</string>
+
+    <string name="title_language_pick">语言</string>
+    <string name="language_pick_content">请选择语言</string>
+
+    <string name="sim_connect">连接到移动网络</string>
+    <string name="insert_sim">SIM卡槽在手机左边缘的上方。\n\n请使用手机盒中随带的卡针插入卡槽上的圆孔使卡槽弹出，然后插入nano SIM卡。\n\n插入SIM卡后需要几秒钟来激活。</string>
+    <string name="sim_connecting">正在连接\u2026</string>
+
+    <string name="title_date_time">日期 &#038; 时间</string>
+    <string name="date_time_prof">可根据需要进行调整。</string>
+    <string name="setup_current_date">日期</string>
+    <string name="setup_current_time">时间</string>
+
+    <string name="finish_waiting">请稍等\u2026</string>
 </resources>

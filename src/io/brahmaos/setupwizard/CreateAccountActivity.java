@@ -16,6 +16,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.setupwizardlib.GlifLayout;
+
 import io.brahmaos.setupwizard.view.CustomProgressDialog;
 
 public class CreateAccountActivity extends BaseActivity {
@@ -39,6 +41,10 @@ public class CreateAccountActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_account_create);
+        GlifLayout gl = (GlifLayout) findViewById(R.id.setup_wizard_layout);
+        gl.setHeaderText(R.string.create_account);
+        gl.setIcon(getDrawable(R.drawable.account));
+
         etAccountName = findViewById(R.id.et_account_name);
         etPassword = findViewById(R.id.et_password);
         etRepeatPassword = findViewById(R.id.et_repeat_password);

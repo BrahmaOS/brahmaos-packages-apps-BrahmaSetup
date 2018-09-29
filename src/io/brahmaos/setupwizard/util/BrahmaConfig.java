@@ -1,6 +1,7 @@
 package io.brahmaos.setupwizard.util;
 
 import android.content.Context;
+import android.os.SystemProperties;
 
 import java.util.Locale;
 
@@ -10,6 +11,7 @@ import java.util.Locale;
  */
 
 public class BrahmaConfig {
+    private static final String PROP_BUILD_DATE = "ro.build.date.utc";
 
     public static String getServiceTermsUrl() {
         String languageLocale = Locale.getDefault().getLanguage();
@@ -27,5 +29,9 @@ public class BrahmaConfig {
             serviceUrl = BrahmaConst.PRIVACY_POLICY_PATH_ZH;
         }
         return serviceUrl;
+    }
+
+    public static long getBuildDateTimestamp() {
+        return SystemProperties.getLong(PROP_BUILD_DATE, 0);
     }
 }

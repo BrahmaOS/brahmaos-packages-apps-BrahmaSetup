@@ -3,6 +3,7 @@
     <color name="colorPrimary">@color/master</color>
     <color name="master">#3C78C2</color>
     <color name="divider">#18000000</color>
+    <color name="setup_divider_color_light">#33000000</color>
     <color name="color_hint_text">#64000000</color>
     <color name="color_divider">#1c000000</color>
 

@@ -7,13 +7,17 @@
 
     <dimen name="space_smaller">8dp</dimen>
     <dimen name="space_small">10dp</dimen>
-    <dimen name="space_normal">20dp</dimen>
+    <dimen name="space_normal">22dp</dimen>
     <dimen name="space_large">25dp</dimen>
     <dimen name="space_larger">35dp</dimen>
 
     <dimen name="icon_size">45dp</dimen>
+    <dimen name="list_icon">24dp</dimen>
+    <dimen name="list_margin">50dp</dimen>
 
     <dimen name="block_corner">4dp</dimen>
     <dimen name="dialog_width">300dp</dimen>
     <dimen name="dialog_height">550dp</dimen>
+
+    <dimen name="content_margin_left">26dp</dimen>
 </resources>

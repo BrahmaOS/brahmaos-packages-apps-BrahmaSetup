@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.setupwizardlib.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:suwFooter="@layout/wizard_next_footer">
+
+    <LinearLayout
+        android:id="@+id/note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/space_normal"
+        android:layout_marginStart="@dimen/space_normal"
+        android:orientation="vertical">
+        <com.android.setupwizardlib.view.RichTextView
+            style="@style/SuwDescription.Glif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date_time_prof" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/space_larger"
+            android:background="@color/setup_divider_color_light" />
+
+        <Spinner
+            android:id="@+id/timezone_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:saveEnabled="false" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/space_larger"
+            android:background="@color/setup_divider_color_light" />
+
+        <TwoLineListItem
+            android:id="@+id/date_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:mode="twoLine">
+
+            <com.android.setupwizardlib.view.RichTextView
+                style="@style/SuwDescription.Glif"
+                android:id="@+id/date_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setup_current_date"
+                android:textColor="@color/color_hint_text"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.android.setupwizardlib.view.RichTextView
+                style="@style/SuwDescription.Glif"
+                android:id="@+id/date_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/date_title"
+                android:layout_below="@id/date_title"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/font_size_normal" />
+        </TwoLineListItem>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/space_larger"
+            android:background="@color/color_divider" />
+
+        <TwoLineListItem
+            android:id="@+id/time_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:mode="twoLine">
+
+            <com.android.setupwizardlib.view.RichTextView
+                style="@style/SuwDescription.Glif"
+                android:id="@+id/time_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setup_current_time"
+                android:textColor="@color/color_hint_text"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.android.setupwizardlib.view.RichTextView
+                style="@style/SuwDescription.Glif"
+                android:id="@+id/time_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/time_title"
+                android:layout_below="@id/time_title"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/font_size_normal" />
+        </TwoLineListItem>
+
+
+    </LinearLayout>
+</com.android.setupwizardlib.GlifLayout>

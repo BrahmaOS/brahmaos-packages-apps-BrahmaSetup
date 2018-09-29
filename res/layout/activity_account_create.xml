@@ -1,55 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.setupwizardlib.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/white">
+    app:suwFooter="@layout/wizard_account_footer">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginRight="@dimen/space_normal"
         android:layout_marginStart="@dimen/space_normal">
 
-        <LinearLayout
-            android:id="@+id/title"
+        <com.android.setupwizardlib.view.RichTextView
+            style="@style/SuwDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:layout_marginTop="@dimen/space_larger"
-                android:scaleType="fitCenter"
-                android:src="@drawable/account" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_large"
-                android:text="@string/create_account"
-                android:textColor="#FF000000"
-                android:textSize="@dimen/font_size_title" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_normal"
-                android:text="@string/account_prof"
-                android:textColor="@color/color_hint_text"
-                android:textSize="@dimen/font_size_normal" />
-        </LinearLayout>
-
+            android:text="@string/account_prof" />
 
         <LinearLayout
             android:id="@+id/layout_create_account_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/space_small">
+            android:paddingTop="@dimen/space_normal">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -167,37 +143,6 @@
                     android:text="@string/tip_create_account_two"
                     android:textColor="#FF000000" />
             </LinearLayout>
-
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_normal"
-            android:layout_marginBottom="@dimen/space_normal">
-
-            <Button
-                android:id="@+id/btn_create_account"
-                style="@style/ButtonNext"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:enabled="false"
-                android:text="@string/action_next" />
-
-            <TextView
-                android:id="@+id/btn_import_account"
-                style="@style/TextViewCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/action_import_account" />
-        </RelativeLayout>
-
     </LinearLayout>
-</ScrollView>
+</com.android.setupwizardlib.GlifLayout>

@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="fingerprint_layout_theme" format="reference" />
+    <attr name="ic_menu_moreoverflow" format="reference" />
+    <attr name="ic_wps" format="reference" />
+    <attr name="setup_divider_color" format="reference" />
+    <attr name="side_margin" format="reference|dimension" />
+    <attr name="wifi_signal_color" format="reference" />
+    <attr name="preferenceBackgroundColor" format="color" />
+
+    <style name="ThemeOverlay.AlertDialog" parent="@android:style/ThemeOverlay.Material.Dialog.Alert">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="GlifTheme.Light" parent="SuwThemeGlif.Light">
+        <!-- For all Alert Dialogs -->
+        <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
+        <item name="android:windowBackground">?android:attr/colorBackground</item>
+        <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
+        <item name="setup_divider_color">@color/setup_divider_color_light</item>
+        <item name="side_margin">0dip</item>
+<!--        <item name="preferenceBackgroundColor">?android:attr/colorBackground</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.SetupWizard</item>
+
+        <item name="*android:lockPatternStyle">@style/LockPatternStyle.Setup</item>-->
+    </style>
+
+<!--
+    <style name="PreferenceTheme.SetupWizard" parent="PreferenceTheme">
+        <item name="preferenceFragmentStyle">@style/SetupWizardPreferenceFragmentStyle</item>
+        <item name="preferenceStyle">@style/Preference.Material</item>
+    </style>
+-->
+
+<!--    <style name="SetupWizardPreferenceFragmentStyle" parent="PreferenceFragment.Material">
+        <item name="android:layout">@layout/setup_preference</item>
+    </style>-->
+
+    <style name="wizardTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:selectableItemBackground">@null</item>
+        <item name="android:selectableItemBackgroundBorderless">@null</item>
+    </style>
     <!-- material edit text input -->
     <style name="customEditTextLineColor" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/colorPrimary</item>
@@ -40,5 +80,4 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
     </style>
-
 </resources>

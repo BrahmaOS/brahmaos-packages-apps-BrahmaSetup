@@ -74,18 +74,30 @@
 
     <application android:name=".WizardApplication"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@style/GlifTheme.Light"
         android:directBootAware="true">
-<!--
-                android:taskAffinity="com.android.wizard"-->
-        <activity android:name=".CreateAccountActivity"
-                android:windowSoftInputMode="stateAlwaysHidden"
-                android:excludeFromRecents="true">
+
+        <activity android:name=".LanguagePickActivity">
             <intent-filter android:priority="6">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.SETUP_WIZARD" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".SIMCardActivity" />
+
+        <activity android:name=".CreateAccountActivity"
+                android:windowSoftInputMode="stateAlwaysHidden">
+        </activity>
+
+        <activity android:name=".DateTimeActivity"
+            android:excludeFromRecents="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="io.brahmaos.setupwizard.SETUP_DATETIME" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -101,6 +113,7 @@
 
         <activity android:name=".ServiceTermsActivity"
             android:theme="@style/TranslucentDialog"/>
+        <activity android:name=".FinishSetupActivity" />
     </application>
 </manifest>
 

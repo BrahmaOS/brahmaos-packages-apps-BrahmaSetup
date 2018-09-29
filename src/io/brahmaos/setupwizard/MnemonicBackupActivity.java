@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.setupwizardlib.GlifLayout;
+
 public class MnemonicBackupActivity extends BaseActivity {
     private TextView tvMnemonic;
     private Button btnNext;
@@ -19,6 +21,10 @@ public class MnemonicBackupActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mnemonic_backup);
+        GlifLayout gl = (GlifLayout) findViewById(R.id.setup_wizard_layout);
+        gl.setHeaderText(R.string.backup_mnemonic);
+        gl.setIcon(getDrawable(R.drawable.backup));
+
         tvMnemonic = (TextView) findViewById(R.id.mnemonic_str);
         btnNext = (Button) findViewById(R.id.btn_next);
         btnNext.setOnClickListener(view->startMnemonicConfirmActivity());

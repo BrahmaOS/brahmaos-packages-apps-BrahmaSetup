@@ -22,30 +22,27 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v4 \
     bitcoinj-core \
     web3j-core \
+    web3j-crypto \
+    web3j-abi \
+    web3j-rlp \
+    web3j-tuples \
+    web3j-utils \
     guava-18 \
     slf4j-jdk14 \
     spongycastle-core \
     spongycastle-prov \
     protobuf-java \
-    scrypt-jar
+    lambda-scrypt
+
+LOCAL_STATIC_ANDROID_LIBRARIES := \
+    android-support-v7-preference
 
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVILEGED_MODULE := true
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
+include frameworks/opt/setupwizard/library/common-gingerbread.mk
+include frameworks/base/packages/SettingsLib/common.mk
 include $(BUILD_PACKAGE)
-
-include $(CLEAR_VARS)
-
-LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := bitcoinj-core:libs/bitcoinj-core-0.14.7.jar \
-                                        web3j-core:libs/web3j-core-android-2.2.1.jar \
-                                        guava-18:libs/guava-18.0.jar \
-                                        spongycastle-core:libs/spongycastle-core-1.54.0.0.jar \
-                                        spongycastle-prov:libs/spongycastle-prov-1.54.0.0.jar \
-                                        protobuf-java:libs/protobuf-java-2.6.1.jar \
-                                        scrypt-jar:libs/lambdaworks-scrypt-1.4.0.jar
-LOCAL_MODULE_TAGS := optional
-
-include $(BUILD_MULTI_PREBUILT)
 

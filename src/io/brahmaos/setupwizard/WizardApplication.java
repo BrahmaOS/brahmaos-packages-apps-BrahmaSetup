@@ -6,7 +6,9 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import io.brahmaos.setupwizard.util.AES128;
+import android.util.BrahmaConstants;
+import io.brahmaos.setupwizard.util.NetworkMonitor;
+import io.brahmaos.setupwizard.util.PhoneMonitor;
 import io.brahmaos.setupwizard.util.SHAEncrypt;
 import io.brahmaos.setupwizard.util.BLog;
 import io.brahmaos.setupwizard.util.BrahmaConst;
@@ -17,9 +19,14 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import android.support.annotation.Nullable;
+import android.util.BrahmaConstants;
+import android.util.DataCryptoUtils;
 import android.util.Log;
 
 import com.google.common.base.Splitter;
@@ -47,6 +54,14 @@ public class WizardApplication extends Application {
     private StatusBarManager mStatusBarManager;
     private UserManager mUserManager;
     private int mUserId;
+    private DataCryptoUtils mDc;
+    public static int mCurIndex = 0;
+
+    private String mBrahmaAccount;
+    private String mMnemonicCryptoHex;
+    private String mPublicKeyHex;
+    private String mPrivateCryptoHex;
+    private HashMap<String, String> mWalletMap = new HashMap<String, String>();//<path, walletAddr>
 
     @Override
     public void onCreate() {
@@ -61,6 +76,10 @@ public class WizardApplication extends Application {
         mUserManager = (UserManager) getSystemService(USER_SERVICE);
 
         mUserId = UserHandle.myUserId();
+        mDc = new DataCryptoUtils();
+
+        NetworkMonitor.initInstance(this);
+        PhoneMonitor.initInstance(this);
     }
 
     @Override
@@ -105,47 +124,62 @@ public class WizardApplication extends Application {
             mUserManager.setUserName(mUserId, name);
 
             //save wallet address
-            result = handleSaveWalletAddressForPath(mnemonics, name, BrahmaConst.ETH_PATH);
+            result = getWalletAddressForPath(mnemonics, name, BrahmaConstants.ETH_MNEMONIC_PATH);
             if (!result) {
                 return false;
             }
-            //result = handleSaveWalletAddressForPath(mnemonics, name, BrahmaConst.BRM_PATH);
+            //result = getWalletAddressForPath(mnemonics, name, DataCryptoUtils.BRM_MNEMONIC_PATH);
             //if (!result) {
             //    return false;
             //}
 
             //save encrypted mnemonics
-            String mnemonicHex = AES128.encrypt(mnemonics, password);
-            if (null == mnemonicHex) {
+            mMnemonicCryptoHex = mDc.aes128Encrypt(mnemonics, password);
+            if (null == mMnemonicCryptoHex) {
                 return false;
             }
-            mUserManager.setUserDefaultMnemonicHex(mUserId, mnemonicHex);
 
             //save brahmaos account
-            String brahmaAccount = SHAEncrypt.shaEncrypt(mnemonicHex, "SHA-256");
-            mUserManager.setUserBrahmaAccount(mUserId, brahmaAccount);
+            mBrahmaAccount = SHAEncrypt.shaEncrypt(mMnemonicCryptoHex, "SHA-256");
 
             //save data encrypt key pair
-            ECKeyPair defaultKeyPair = getECKeyPairForPath(mnemonics, BrahmaConst.DEFAULT_PATH);
+            ECKeyPair defaultKeyPair = getECKeyPairForPath(mnemonics, BrahmaConstants.DEFAULT_MNEMONIC_PATH);
             if (null == defaultKeyPair) {
                 return false;
             }
             BigInteger privateKey = defaultKeyPair.getPrivateKey();
             BigInteger publicKey = defaultKeyPair.getPublicKey();
-            mUserManager.setUserDefaultPublicKey(mUserId, publicKey.toString());
+            mPublicKeyHex = publicKey.toString(16);
 
             //encrypt the private key before saving it
-            String privateEncrypt = AES128.encrypt(privateKey.toString(), password);
-            if (null == privateEncrypt) {
+            mPrivateCryptoHex = mDc.aes128Encrypt(privateKey.toString(16), password);
+            if (null == mPrivateCryptoHex) {
                 return false;
             }
-            mUserManager.setUserDefaultPrivateKeyHex(mUserId, privateEncrypt);
         }catch (Exception e) {
             e.printStackTrace();
             BLog.d(TAG, e.toString());
         }
 
         return result;
+    }
+
+    /** This must be called only once
+     *  in the last of successfully create or import brahma os account **/
+    public void saveBrahmaData() {
+        mUserManager.setUserBrahmaAccount(mUserId, mBrahmaAccount);
+
+        mUserManager.setUserDefaultMnemonicHex(mUserId, mMnemonicCryptoHex);
+
+        Iterator<HashMap.Entry<String, String>> iterator = mWalletMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            mUserManager.setUserDefaultWalletAddr(mUserId, entry.getValue(), entry.getKey());
+        }
+
+        mUserManager.setUserDefaultPublicKey(mUserId, mPublicKeyHex);
+
+        mUserManager.setUserDefaultPrivateKeyHex(mUserId, mPrivateCryptoHex);
     }
 
     private ECKeyPair getECKeyPairForPath(String mnemonics, String path) {
@@ -168,7 +202,7 @@ public class WizardApplication extends Application {
         return null;
     }
 
-    private boolean handleSaveWalletAddressForPath(String mnemonics, String password, String path) {
+    private boolean getWalletAddressForPath(String mnemonics, String password, String path) {
         boolean result = true;
         try {
             //produce private key by mnemonic
@@ -180,7 +214,7 @@ public class WizardApplication extends Application {
                     result = false;
                 }
 
-                mUserManager.setUserDefaultWalletAddr(mUserId, walletAddr, path);
+                mWalletMap.put(path, walletAddr);
                 return true;
             }
         } catch (CipherException e) {

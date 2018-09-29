@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.setupwizardlib.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/white">
+    app:suwFooter="@layout/wizard_next_footer">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,29 +13,6 @@
         android:orientation="vertical"
         android:layout_marginRight="@dimen/space_normal"
         android:layout_marginStart="@dimen/space_normal">
-
-        <LinearLayout
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:layout_marginTop="@dimen/space_larger"
-                android:scaleType="fitCenter"
-                android:src="@drawable/account" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_large"
-                android:text="@string/action_import_account"
-                android:textColor="#FF000000"
-                android:textSize="@dimen/font_size_title" />
-        </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/layout_create_account_form"
@@ -163,35 +141,5 @@
                     android:textColor="@color/master" />
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_normal"
-            android:layout_marginBottom="@dimen/space_normal">
-
-            <Button
-                android:id="@+id/btn_next"
-                style="@style/ButtonNext"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:enabled="false"
-                android:text="@string/action_finish" />
-
-            <TextView
-                android:id="@+id/btn_previous"
-                style="@style/TextViewCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:text="@string/action_previous" />
-        </RelativeLayout>
-
     </LinearLayout>
-</ScrollView>
+</com.android.setupwizardlib.GlifLayout>

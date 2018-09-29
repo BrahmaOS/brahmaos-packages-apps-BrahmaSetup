@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.setupwizardlib.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:suwFooter="@layout/wizard_skip_footer">
+
+    <LinearLayout
+        android:id="@+id/note"
+        android:layout_marginRight="@dimen/space_normal"
+        android:layout_marginStart="@dimen/space_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.android.setupwizardlib.view.RichTextView
+            android:id="@+id/insert_sim"
+            style="@style/SuwDescription.Glif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/insert_sim" />
+    </LinearLayout>
+</com.android.setupwizardlib.GlifLayout>

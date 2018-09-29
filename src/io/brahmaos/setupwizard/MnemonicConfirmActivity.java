@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.setupwizardlib.GlifLayout;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,7 +25,7 @@ public class MnemonicConfirmActivity extends BaseActivity implements View.OnClic
     private String[] mMnemonicArray;
     private String mMnemonicString;
     private Button btnNext;
-    private TextView tvPrevious;
+    private Button btnPrevious;
     private LinearLayout parentLinearLayout;
     private int inputCount = 0;
     private ArrayList<LinearLayout> mHorizLL = new ArrayList<LinearLayout>();
@@ -32,11 +34,18 @@ public class MnemonicConfirmActivity extends BaseActivity implements View.OnClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mnemonic_confirm);
+
+        GlifLayout gl = (GlifLayout) findViewById(R.id.setup_wizard_layout);
+        gl.setHeaderText(R.string.confirm_mnemonic);
+        gl.setIcon(getDrawable(R.drawable.confirm));
+
         tvMnemonicTotal = (TextView) findViewById(R.id.tv_mnemonic_total);
         btnNext = (Button) findViewById(R.id.btn_next);
-        btnNext.setOnClickListener(view->setupWizardComplete());
-        tvPrevious = (TextView) findViewById(R.id.btn_previous);
-        tvPrevious.setOnClickListener(view->startMnemonicBackupActivity());
+        btnNext.setEnabled(false);
+        btnNext.setOnClickListener(view->startFingerprintActivity());
+        btnPrevious = (Button) findViewById(R.id.btn_skip);
+        btnPrevious.setText(R.string.action_previous);
+        btnPrevious.setOnClickListener(view->startMnemonicBackupActivity());
         initView();
     }
 
@@ -49,8 +58,7 @@ public class MnemonicConfirmActivity extends BaseActivity implements View.OnClic
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        int margin = (int)getResources().getDimension(R.dimen.space_normal);
-        layoutParams.setMargins(margin, 0, margin, 30);
+        layoutParams.setMargins(0, 0, 20, 40);
         LinearLayout horizLL = null;
         for (int i = 0; i < size; i++) {
             if (i % LINE_BUTTON_SIZE == 0) {
@@ -66,7 +74,6 @@ public class MnemonicConfirmActivity extends BaseActivity implements View.OnClic
             itemParams.setMarginStart(20);
             Button child = (Button) LayoutInflater.from(this).inflate(R.layout.mnemonic_button, null);
             child.setText(item);
-//            child.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.font_size_note_content));
             child.setTag(i);
             child.setLayoutParams(itemParams);
             child.setOnClickListener(this);
