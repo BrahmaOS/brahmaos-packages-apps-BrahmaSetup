@@ -117,19 +117,31 @@ public class CreateAccountActivity extends BaseActivity {
             btnNext.setEnabled(true);
             return;
         }
-        customProgressDialog = new CustomProgressDialog(this, R.style.CustomProgressDialogStyle, getString(R.string.progress_create_account));
+        customProgressDialog = new CustomProgressDialog(CreateAccountActivity.this, R.style.CustomProgressDialogStyle, getString(R.string.progress_create_account));
         customProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         customProgressDialog.setCancelable(false);
         customProgressDialog.show();
 
-        boolean result = ((WizardApplication)getApplication()).createMnemonicsAndBrahmaAccount(name, password);
-        customProgressDialog.cancel();
-        if (result) {
-            showLongToast(R.string.success_create_account);
-            startMnemonicBackupActivity();
-        } else {
-            showLongToast(R.string.error_create_account);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean result = ((WizardApplication)getApplication()).createMnemonicsAndBrahmaAccount(name, password);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (customProgressDialog != null) {
+                            customProgressDialog.cancel();
+                        }
+                        if (result) {
+                            showLongToast(R.string.success_create_account);
+                            startMnemonicBackupActivity();
+                        } else {
+                            showLongToast(R.string.error_create_account);
+                        }
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override

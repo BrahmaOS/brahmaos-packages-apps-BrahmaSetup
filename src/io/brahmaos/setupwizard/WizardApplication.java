@@ -2,7 +2,9 @@ package io.brahmaos.setupwizard;
 
 import android.app.Application;
 import android.app.StatusBarManager;
+import android.app.WalletManager;
 import android.content.Context;
+import android.content.pm.WalletData;
 import android.os.UserHandle;
 import android.os.UserManager;
 
@@ -62,6 +64,7 @@ public class WizardApplication extends Application {
     private String mPublicKeyHex;
     private String mPrivateCryptoHex;
     private HashMap<String, String> mWalletMap = new HashMap<String, String>();//<path, walletAddr>
+    private WalletManager mWalletManager;
 
     @Override
     public void onCreate() {
@@ -74,6 +77,7 @@ public class WizardApplication extends Application {
                 | StatusBarManager.DISABLE_RECENT);//StatusBarManager.DISABLE_BACK
 
         mUserManager = (UserManager) getSystemService(USER_SERVICE);
+        mWalletManager = (WalletManager) getSystemService(WALLET_SERVICE);
 
         mUserId = UserHandle.myUserId();
         mDc = new DataCryptoUtils();
@@ -107,7 +111,6 @@ public class WizardApplication extends Application {
             for (String mnemonic : mnemonicCode) {
                 mMnemonicStr.append(mnemonic).append(" ");
             }
-
             result = createBrahmaAccountByMnemonics(mMnemonicStr.toString().trim(), password, name);
         } else {
             return false;
@@ -121,37 +124,47 @@ public class WizardApplication extends Application {
     public boolean createBrahmaAccountByMnemonics(String mnemonics, String password, String name) {
         boolean result = true;
         try {
+            //clean the default wallets already exist
+            List<WalletData> allWallets = mWalletManager.getAllWallets();
+            if (allWallets != null) {
+                for (WalletData wallet : allWallets) {
+                    if (wallet != null && wallet.isDefault) {
+                        mWalletManager.deleteWalletByAddress(wallet.address);
+                    }
+                }
+            }
+
+            //save user name
             mUserManager.setUserName(mUserId, name);
 
-            //save wallet address
-            result = getWalletAddressForPath(mnemonics, name, BrahmaConstants.ETH_MNEMONIC_PATH);
-            if (!result) {
+            //create ETH wallet and save wallet data to WalletManager
+            WalletData ethWallet = mWalletManager.createDefaultETHWallet(name, mnemonics, password);
+
+            if (null == ethWallet) {
                 return false;
             }
-            //result = getWalletAddressForPath(mnemonics, name, DataCryptoUtils.BRM_MNEMONIC_PATH);
-            //if (!result) {
-            //    return false;
-            //}
+            //map wallet address
+            mWalletMap.put(ethWallet.keyPath, ethWallet.address);
 
-            //save encrypted mnemonics
+            //generate encrypted mnemonics
             mMnemonicCryptoHex = mDc.aes128Encrypt(mnemonics, password);
             if (null == mMnemonicCryptoHex) {
                 return false;
             }
 
-            //save brahmaos account
+            //generate brahmaos account
             mBrahmaAccount = SHAEncrypt.shaEncrypt(mMnemonicCryptoHex, "SHA-256");
 
-            //save data encrypt key pair
-            ECKeyPair defaultKeyPair = getECKeyPairForPath(mnemonics, BrahmaConstants.DEFAULT_MNEMONIC_PATH);
+            //generate key pair by Brahma OS chain path
+            ECKeyPair defaultKeyPair = getECKeyPairForPath(mnemonics, BrahmaConstants.BIP_BRM_OS_PATH);
             if (null == defaultKeyPair) {
                 return false;
             }
             BigInteger privateKey = defaultKeyPair.getPrivateKey();
             BigInteger publicKey = defaultKeyPair.getPublicKey();
+            //generate public key
             mPublicKeyHex = publicKey.toString(16);
-
-            //encrypt the private key before saving it
+            //generate encrypted private key
             mPrivateCryptoHex = mDc.aes128Encrypt(privateKey.toString(16), password);
             if (null == mPrivateCryptoHex) {
                 return false;

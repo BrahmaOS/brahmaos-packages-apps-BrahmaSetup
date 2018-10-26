@@ -145,15 +145,27 @@ public class ImportAccountActivity  extends BaseActivity {
         customProgressDialog.setCancelable(false);
         customProgressDialog.show();
 
-        // check the private key valid
-        boolean result = ((WizardApplication) getApplication()).createBrahmaAccountByMnemonics(mnemonics, password, name);
-        customProgressDialog.cancel();
-        if (result) {
-            showLongToast(R.string.success_import_account);
-            startFingerprintActivity();
-        } else {
-            showLongToast(R.string.error_import_account);
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // check the private key valid
+                boolean result = ((WizardApplication) getApplication()).createBrahmaAccountByMnemonics(mnemonics, password, name);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (customProgressDialog != null) {
+                            customProgressDialog.cancel();
+                        }
+                        if (result) {
+                            showLongToast(R.string.success_import_account);
+                            startFingerprintActivity();
+                        } else {
+                            showLongToast(R.string.error_import_account);
+                        }
+                    }
+                });
+            }
+        }).start();
 
     }
 
