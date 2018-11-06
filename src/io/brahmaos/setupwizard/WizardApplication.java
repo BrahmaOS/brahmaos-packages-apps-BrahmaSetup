@@ -2,13 +2,13 @@ package io.brahmaos.setupwizard;
 
 import android.app.Application;
 import android.app.StatusBarManager;
-import android.app.WalletManager;
+import brahmaos.app.WalletManager;
 import android.content.Context;
-import android.content.pm.WalletData;
+import brahmaos.content.WalletData;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import android.util.BrahmaConstants;
+import brahmaos.content.BrahmaConstants;
 import io.brahmaos.setupwizard.util.NetworkMonitor;
 import io.brahmaos.setupwizard.util.PhoneMonitor;
 import io.brahmaos.setupwizard.util.SHAEncrypt;
@@ -27,8 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.support.annotation.Nullable;
-import android.util.BrahmaConstants;
-import android.util.DataCryptoUtils;
+import brahmaos.util.DataCryptoUtils;
 import android.util.Log;
 
 import com.google.common.base.Splitter;
@@ -50,13 +49,14 @@ import org.web3j.protocol.core.methods.response.EthCall;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.utils.Numeric;
 
+import static brahmaos.content.BrahmaContext.WALLET_SERVICE;
+
 public class WizardApplication extends Application {
     private static final String TAG = "Application";
     private StringBuilder mMnemonicStr;
     private StatusBarManager mStatusBarManager;
     private UserManager mUserManager;
     private int mUserId;
-    private DataCryptoUtils mDc;
     public static int mCurIndex = 0;
 
     private String mBrahmaAccount;
@@ -80,7 +80,6 @@ public class WizardApplication extends Application {
         mWalletManager = (WalletManager) getSystemService(WALLET_SERVICE);
 
         mUserId = UserHandle.myUserId();
-        mDc = new DataCryptoUtils();
 
         NetworkMonitor.initInstance(this);
         PhoneMonitor.initInstance(this);
@@ -147,7 +146,7 @@ public class WizardApplication extends Application {
             mWalletMap.put(ethWallet.keyPath, ethWallet.address);
 
             //generate encrypted mnemonics
-            mMnemonicCryptoHex = mDc.aes128Encrypt(mnemonics, password);
+            mMnemonicCryptoHex = DataCryptoUtils.aes128Encrypt(mnemonics, password);
             if (null == mMnemonicCryptoHex) {
                 return false;
             }
@@ -165,7 +164,7 @@ public class WizardApplication extends Application {
             //generate public key
             mPublicKeyHex = publicKey.toString(16);
             //generate encrypted private key
-            mPrivateCryptoHex = mDc.aes128Encrypt(privateKey.toString(16), password);
+            mPrivateCryptoHex = DataCryptoUtils.aes128Encrypt(privateKey.toString(16), password);
             if (null == mPrivateCryptoHex) {
                 return false;
             }
